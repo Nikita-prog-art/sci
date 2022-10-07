@@ -6,6 +6,7 @@
 
 #include "config.h"
 #include "str.h"
+#include "inputStr.h"
 
 typedef struct _process{
     struct _process *next;
@@ -15,19 +16,6 @@ typedef struct _process{
 #ifdef DEBUG
 char deffn[] = "init.sci";
 #endif
-
-void run(char *s){
-    char *const a[] = {s, s, NULL};
-    pid_t pid;
-    pid = fork();
-    if (pid < 0)
-        exit(-2);
-    if (pid == 0){
-        execvp(s, a);
-        _exit(-3);
-    }
-    return;
-}
 
 int main(int argc, char *argv[]){
     char *file_name;
@@ -50,6 +38,7 @@ int main(int argc, char *argv[]){
     Str s = {1, str};
     while (!eof) {
         s = inputString(inp, s);
-        run(s.s);
+        runf(s.s);
     }
+    //:()
 }
